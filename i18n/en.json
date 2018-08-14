@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"wr-google-login-return-page-google-error": "An error occured while connecting to Google, please try again.",
+	"wr-google-login-return-page-token-error": "Invalid authorization token, please try again.",
+	"wr-google-login-return-page-new-user-error": "An error occured while creating a new account, please try again.",
+	"wr-google-login-return-page-data-failed": "An error occured while fetching user data, please try again."
+}

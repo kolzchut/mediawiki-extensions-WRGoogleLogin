@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"wr-google-login-return-page-google-error": "אירעה שגיאה במהלך החיבור, יש לנסות שנית.",
+	"wr-google-login-return-page-token-error": "קוד אימות לא בתוקף. יש לנסות שנית.",
+	"wr-google-login-return-page-new-user-error": "אירעה שגיאה בזמן יצירת המשתמש. יש לנסות שנית.",
+	"wr-google-login-return-page-data-failed": "אירעה שגיאה במהלך שליפת הנתונים. יש לנסות שנית."
+}
