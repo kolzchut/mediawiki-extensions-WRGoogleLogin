@@ -24,7 +24,7 @@ class SpecialGoogleReturn extends SpecialPage {
 
 		// If no $returnto value was set, set it to the main page
 		if ( !isset( $returnto ) ) {
-			$returnto = $out->redirect( Title::newMainPage()->getFullUrl() );
+			$returnto = Title::newMainPage()->getFullUrl();
 		}
 
 		// Show error if user returns from Google with an error
