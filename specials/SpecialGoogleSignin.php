@@ -16,6 +16,11 @@ class SpecialGoogleSignin extends SpecialPage {
 	public function execute( $sub ) {
 		global $wgWRGoogleLoginConfig;
 
+		$request = $this->getRequest();
+		$params = $request->getQueryValues();
+
+		$returnto = $params[ 'returnto' ];
+
 		$client = WRGoogleLogin::createClient(
 			$wgWRGoogleLoginConfig[ 'client_id' ],
 			$wgWRGoogleLoginConfig[ 'client_secret' ],
@@ -24,6 +29,7 @@ class SpecialGoogleSignin extends SpecialPage {
 
 		$client->addScope( 'https://www.googleapis.com/auth/userinfo.profile' );
 		$client->addScope( 'https://www.googleapis.com/auth/userinfo.email' );
+		$client->setState( $returnto );
 		$auth_url = $client->createAuthUrl();
 
 		header( 'Location: ' . Skin::makeInternalOrExternalUrl( $auth_url ) );

@@ -17,9 +17,15 @@ class SpecialGoogleReturn extends SpecialPage {
 	public function execute( $sub ) {
 		global $wgWRGoogleLoginConfig;
 
-		$out     = $this->getOutput();
-		$request = $this->getRequest();
-		$params  = $request->getQueryValues();
+		$out      = $this->getOutput();
+		$request  = $this->getRequest();
+		$params   = $request->getQueryValues();
+		$returnto = $params[ 'state' ];
+
+		// If no $returnto value was set, set it to the main page
+		if ( !isset( $returnto ) ) {
+			$returnto = $out->redirect( Title::newMainPage()->getFullUrl() );
+		}
 
 		// Show error if user returns from Google with an error
 		if ( array_key_exists( 'error', $params ) ) {
@@ -62,7 +68,7 @@ class SpecialGoogleReturn extends SpecialPage {
 		if ( $googleUser ) {
 			WRGoogleLogin::loginUser( $googleUser );
 
-			$this->redirectToMainPage();
+			$this->redirect( $returnto );
 		}
 
 		$mwUser = WRGoogleLogin::isExistingMediaWikiUser( $email );
@@ -72,7 +78,7 @@ class SpecialGoogleReturn extends SpecialPage {
 			WRGoogleLogin::registerGoogleUser( $mwUser, $email );
 			WRGoogleLogin::loginUser( $mwUser );
 
-			$this->redirectToMainPage();
+			$this->redirect( $returnto );
 		}
 
 		// If user doesn't exist, register them and log them in
@@ -93,14 +99,14 @@ class SpecialGoogleReturn extends SpecialPage {
 			$user = WRGoogleLogin::registerGoogleUser( $newUserId, $email );
 			WRGoogleLogin::loginUser( $newUserId );
 
-			$this->redirectToMainPage();
+			$this->redirect( $returnto );
 		}
 	}
 
-	private function redirectToMainPage() {
+	private function redirect( $url ) {
 		global $wgOut;
 
-		$wgOut->redirect( Title::newMainPage()->getFullUrl() );
+		$wgOut->redirect( Skin::makeInternalOrExternalUrl( $url ) );
 	}
 
 }
