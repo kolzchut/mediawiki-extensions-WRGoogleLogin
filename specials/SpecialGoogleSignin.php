@@ -14,7 +14,7 @@ class SpecialGoogleSignin extends SpecialPage {
 	 * @param string $sub The subpage string argument (if any).
 	 */
 	public function execute( $sub ) {
-		global $wgWRGoogleLoginConfig;
+		global $wgWRGoogleLoginConfig, $wgOut;
 
 		$request = $this->getRequest();
 		$params = $request->getQueryValues();
@@ -32,8 +32,7 @@ class SpecialGoogleSignin extends SpecialPage {
 		$client->setState( $returnto );
 		$auth_url = $client->createAuthUrl();
 
-		header( 'Location: ' . Skin::makeInternalOrExternalUrl( $auth_url ) );
-
+		$wgOut->redirect( Skin::makeInternalOrExternalUrl( $auth_url ) );
 	}
 
 }
