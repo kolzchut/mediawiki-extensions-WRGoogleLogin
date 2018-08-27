@@ -38,5 +38,8 @@
 			"i18n"
 		]
 	},
+	"ExtensionMessagesFiles": {
+		"WRGoogleLoginAlias": "WRGoogleLogin.i18n.alias.php"
+	},
 	"manifest_version": 1
 }
