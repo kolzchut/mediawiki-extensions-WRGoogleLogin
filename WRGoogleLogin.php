@@ -10,8 +10,10 @@ class WRGoogleLogin {
 	 * @param string $redirect_uri Redirect URI from Google Console
 	 * @return Google_Client
 	 */
-	public static function createClient( $id, $secret, $redirect_uri )
-	{
+	public static function createClient( $id, $secret, $redirect_uri ) {
+		if ( empty( $redirect_uri ) ) {
+			$redirect_uri = SpecialPage::getTitleFor( 'GoogleReturn' )->getFullURL();
+		}
 		$client = new Google_Client();
 		$client->setClientSecret( $secret );
 		$client->setClientId( $id );
